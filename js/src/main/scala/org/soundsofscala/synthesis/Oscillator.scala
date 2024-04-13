@@ -53,13 +53,13 @@ enum Oscillator(frequency: Frequency, volume: Volume)(using audioContext: AudioC
   def updateFrequency(frequency: Double): Unit = oscillatorNode.frequency.value = frequency
   def updateFrequencyFromPitch(pitch: Pitch): Unit =
     oscillatorNode.frequency.value = pitch match
-      case Pitch.C => pitch.calculateFrequency
-      case Pitch.D => pitch.calculateFrequency
-      case Pitch.E => pitch.calculateFrequency
-      case Pitch.F => pitch.calculateFrequency
-      case Pitch.G => pitch.calculateFrequency
-      case Pitch.A => pitch.calculateFrequency
-      case Pitch.B => pitch.calculateFrequency
+      case Pitch.C => pitch.calculateFrequency(Accidental.Natural, Octave(4))
+      case Pitch.D => pitch.calculateFrequency(Accidental.Natural, Octave(4))
+      case Pitch.E => pitch.calculateFrequency(Accidental.Natural, Octave(4))
+      case Pitch.F => pitch.calculateFrequency(Accidental.Natural, Octave(4))
+      case Pitch.G => pitch.calculateFrequency(Accidental.Natural, Octave(4))
+      case Pitch.A => pitch.calculateFrequency(Accidental.Natural, Octave(4))
+      case Pitch.B => pitch.calculateFrequency(Accidental.Natural, Octave(4))
 
   def updateVolume(volume: Volume): Unit =
     amplifier.setLevelIndiscriminately(volume)
@@ -77,7 +77,7 @@ enum Oscillator(frequency: Frequency, volume: Volume)(using audioContext: AudioC
 
   def stop(when: Double): Unit =
     amplifier.quickFade(when: Double)
-    oscillatorNode.stop(when + 10)
+    oscillatorNode.stop(when + 100)
 
   def volume(volume: Volume): Oscillator =
     this match

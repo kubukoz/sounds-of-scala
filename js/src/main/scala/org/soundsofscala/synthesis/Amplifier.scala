@@ -18,4 +18,4 @@ case class Amplifier()(using audioContext: AudioContext):
     gainNode.gain.linearRampToValueAtTime(vol.value, when + 0.1)
 
   def quickFade(stopTime: Double): Unit =
-    gainNode.gain.linearRampToValueAtTime(0.0001, Math.max(stopTime + 0.2, stopTime))
+    gainNode.gain.exponentialRampToValueAtTime(0.0001, Math.max(stopTime + 0.2, stopTime))

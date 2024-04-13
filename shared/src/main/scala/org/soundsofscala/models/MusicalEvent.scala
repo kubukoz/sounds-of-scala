@@ -154,6 +154,7 @@ enum AtomicMusicalEvent(duration: Duration, velocity: Velocity) extends MusicalE
       octave: Octave,
       velocity: Velocity
   ) extends AtomicMusicalEvent(duration, velocity)
+
   case Rest(duration: Duration) extends AtomicMusicalEvent(duration, TheSilentTreatment)
   case DrumStroke(
       drum: DrumVoice,

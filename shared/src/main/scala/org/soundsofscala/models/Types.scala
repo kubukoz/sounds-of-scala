@@ -39,6 +39,9 @@ object Tempo extends Refined[Double]:
 type Swing = Swing.Type
 
 object Swing extends Refined[Int]:
+  val Straight: Swing = apply(0)
+  val Swung: Swing = apply(10)
+
   override inline def invalidReason(s: Int): String =
     expectedMessage("is an Int between 0 and 10. 0 is totally straight. 10 is very swung.")
 

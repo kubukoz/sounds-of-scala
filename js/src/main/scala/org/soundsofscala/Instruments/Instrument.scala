@@ -83,13 +83,13 @@ final case class SimpleDrumSynth() extends Instrument
 final case class ScalaSynth()(using audioContext: AudioContext) extends Instrument:
   def attackRelease(when: Double, note: Note, tempo: Tempo, release: Release): IO[Unit] =
     IO:
-      val keyNote = note.pitch.calculateFrequency
+      val keyNote = note.pitch.calculateFrequency(note.accidental, note.octave)
       val sineVelocity = note.velocity.getNormalisedVelocity
 //      val sawVelocity = note.velocity.getNormalisedVelocity / 10
       val triangleVelocity = note.velocity.getNormalisedVelocity / 8
       val oscillators = Seq(
-        SineOscillator(Frequency(keyNote / 8), Volume(sineVelocity)),
-        TriangleOscillator(Frequency(keyNote / 4), Volume(triangleVelocity))
+        SineOscillator(Frequency(keyNote / 8), Volume(sineVelocity))
+        // TriangleOscillator(Frequency(keyNote / 4), Volume(triangleVelocity))
 //        SquareOscillator(Frequency(keyNote / 8), Volume(sawVelocity))
       )
       oscillators.foreach: osc =>
